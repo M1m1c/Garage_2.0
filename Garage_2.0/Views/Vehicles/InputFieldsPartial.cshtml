@@ -1,15 +1,12 @@
-﻿@model Garage_2._0.Models.Vehicle
+﻿@model Garage_2._0.Models.VehicleDetailViewModel
 
-    @*<div class="d-inline-block">
-        @Html.DisplayNameFor(model => model.VehicleType)
-        @Html.DisplayFor(model => model.VehicleType)
-    </div>*@
-    
-        <div class="form-group">
-            <label asp-for="Color" class="control-label"></label>
-            <input asp-for="Color" class="form-control" />
-            <span asp-validation-for="Color" class="text-danger"></span>
-        </div>
+    <div class="form-group">
+        @* asp-items="@Model.Colors" *@
+        <label asp-for="Color" class="control-label"></label>
+        <select asp-for="Color" class="form-control">
+            <option selected="selected" value="">Välj Färg...</option>
+        </select>
+    </div>
         <div class="form-group">
             <label asp-for="Brand" class="control-label"></label>
             <input asp-for="Brand" class="form-control" />
@@ -25,7 +22,7 @@
             <input asp-for="Wheels" class="form-control" />
             <span asp-validation-for="Wheels" class="text-danger"></span>
         </div>
-    </div>
+
 
 
 
