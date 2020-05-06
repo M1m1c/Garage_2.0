@@ -150,6 +150,43 @@ namespace Garage_2._0.Controllers
             return _context.Vehicle.Any(e => e.Id == id);
         }
 
-       
+       public async Task<IActionResult> GetOverviewModel()
+        {
+            var model = _context.Vehicle.Select(v => new VehicleOverviewModel
+            {
+                Id= v.Id,
+                VehicleType = v.VehicleType,
+                RegNum = v.RegNum,
+                ArrivalTime=v.ArrivalTime
+            });
+
+            return View(await model.ToListAsync());
+        }
+
+        public async Task<IActionResult> GetDetailViewModel(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var vehicle = await _context.Vehicle.FirstOrDefaultAsync(v => v.Id == id);
+                
+            if (vehicle == null)
+            {
+                return NotFound();
+            }
+
+            var model = new VehicleDetailViewModel
+            {
+                Id = vehicle.Id,
+                Wheels = vehicle.Wheels,
+                Brand = vehicle.Brand,
+                Color = vehicle.Color,
+                Model = vehicle.Model
+            };
+
+            return View(model);
+        }
     }
 }
