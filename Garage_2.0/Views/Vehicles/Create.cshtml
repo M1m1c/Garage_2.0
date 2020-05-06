@@ -4,58 +4,64 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>Parkera</h1>
 
-<h4>Vehicle</h4>
+<h4>Fordon</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    @*<div class="col-md-4">*@
         <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="VehicleType" class="control-label"></label>
-                <select asp-for="VehicleType" class="form-control"></select>
-                <span asp-validation-for="VehicleType" class="text-danger"></span>
+            <div class="row">
+            <div class="col d-inline-block">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="VehicleType" class="control-label"></label>
+                    <select asp-for="VehicleType" class="form-control"></select>
+                    <span asp-validation-for="VehicleType" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="RegNum" class="control-label"></label>
+                    <input asp-for="RegNum" class="form-control" />
+                    <span asp-validation-for="RegNum" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Color" class="control-label"></label>
+                    <select asp-for="Color" class="form-control"></select>
+                    <span asp-validation-for="Color" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Brand" class="control-label"></label>
+                    <input asp-for="Brand" class="form-control" />
+                    <span asp-validation-for="Brand" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="RegNum" class="control-label"></label>
-                <input asp-for="RegNum" class="form-control" />
-                <span asp-validation-for="RegNum" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Color" class="control-label"></label>
-                <select asp-for="Color" class="form-control"></select>
-                <span asp-validation-for="Color" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Brand" class="control-label"></label>
-                <input asp-for="Brand" class="form-control" />
-                <span asp-validation-for="Brand" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Model" class="control-label"></label>
-                <input asp-for="Model" class="form-control" />
-                <span asp-validation-for="Model" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Wheels" class="control-label"></label>
-                <input asp-for="Wheels" class="form-control" />
-                <span asp-validation-for="Wheels" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ArrivalTime" class="control-label"></label>
-                <input asp-for="ArrivalTime" class="form-control" />
-                <span asp-validation-for="ArrivalTime" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+            <div class="col d-inline-block">
+                <div class="form-group">
+                    <label asp-for="Model" class="control-label"></label>
+                    <input asp-for="Model" class="form-control" />
+                    <span asp-validation-for="Model" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Wheels" class="control-label"></label>
+                    <input asp-for="Wheels" class="form-control" />
+                    <span asp-validation-for="Wheels" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ArrivalTime" class="control-label"></label>
+                    <input asp-for="ArrivalTime" class="form-control" />
+                    <span asp-validation-for="ArrivalTime" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+                </div>
+                </div>
+</form>
     </div>
-</div>
+@*</div>*@
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Tillbaka till översikt</a>
 </div>
 
 @section Scripts {
