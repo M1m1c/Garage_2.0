@@ -11,29 +11,32 @@ namespace Garage_2._0.Models
 
         
         public int Id { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Fordonstyp är obligatoriskt")]
         [Display(Name = "Typ")]
+
         public EnumType VehicleType { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Registreringsnummer är obligatoriskt")]
         [Display(Name = "Regnummer")]
+        [MaxLength(6, ErrorMessage = "Max 6 tecken")]
         public string RegNum { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Färg på fordonet är obligatoriskt")]
         [Display(Name ="Färg")]
         public EnumColor Color { get; set; }
         
-        [Required]
+        [Required(ErrorMessage = "Fabrikat är obligatoriskt")]
         [Display(Name = "Fabrikat")]
         public string Brand { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Modell är obligatoriskt")]
         [Display(Name = "Modell")]
         public string Model { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Antal hjul är obligatoriskt")]
         [Display(Name = "Hjul")]
-        [Range(0,10)]
+        [RegularExpression(@"^([0-9]|10)$", ErrorMessage = "Ange 0-10 hjul")]
+        //[Range(0,10)]
         public int Wheels { get; set; }
 
         [Display(Name = "Ankomst")]
