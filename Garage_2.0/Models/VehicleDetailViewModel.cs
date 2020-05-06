@@ -8,6 +8,8 @@ namespace Garage_2._0.Models
 {
     public class VehicleDetailViewModel
     {
+        public int Id { get; set; }
+
         [Display(Name ="Antal Hjul")]
         public int Wheels { get; set; }
 

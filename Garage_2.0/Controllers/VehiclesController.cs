@@ -154,6 +154,7 @@ namespace Garage_2._0.Controllers
         {
             var model = _context.Vehicle.Select(v => new VehicleOverviewModel
             {
+                Id= v.Id,
                 VehicleType = v.VehicleType,
                 RegNum = v.RegNum,
                 ArrivalTime=v.ArrivalTime
@@ -178,6 +179,7 @@ namespace Garage_2._0.Controllers
 
             var model = new VehicleDetailViewModel
             {
+                Id = vehicle.Id,
                 Wheels = vehicle.Wheels,
                 Brand = vehicle.Brand,
                 Color = vehicle.Color,
