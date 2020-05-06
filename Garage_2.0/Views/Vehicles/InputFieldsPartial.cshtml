@@ -1,0 +1,34 @@
+﻿@model Garage_2._0.Models.Vehicle
+
+    @*<div class="d-inline-block">
+        @Html.DisplayNameFor(model => model.VehicleType)
+        @Html.DisplayFor(model => model.VehicleType)
+    </div>*@
+    
+        <div class="form-group">
+            <label asp-for="Color" class="control-label"></label>
+            <input asp-for="Color" class="form-control" />
+            <span asp-validation-for="Color" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Brand" class="control-label"></label>
+            <input asp-for="Brand" class="form-control" />
+            <span asp-validation-for="Brand" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Model" class="control-label"></label>
+            <input asp-for="Model" class="form-control" />
+            <span asp-validation-for="Model" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Wheels" class="control-label"></label>
+            <input asp-for="Wheels" class="form-control" />
+            <span asp-validation-for="Wheels" class="text-danger"></span>
+        </div>
+    </div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
