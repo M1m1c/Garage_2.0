@@ -162,7 +162,6 @@ namespace Garage_2._0.Controllers
             return View(await model.ToListAsync());
         }
 
-        //Tror att den här kankse bör ta en inout från cshtml så att den bara ger tillbaka ett vehicle
         public async Task<IActionResult> GetDetailViewModel(int? id)
         {
             if (id == null)
