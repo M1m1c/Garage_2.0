@@ -21,7 +21,7 @@
                     <div class="form-group">
                         <label asp-for="VehicleType" class="control-label"></label>
                         @*asp-items="@Model.VehicleType"*@
-                        <select asp-for="VehicleType" class="form-control">
+                        <select asp-items="@Html.GetEnumSelectList<EnumType>()" class="form-control">
                             <option selected="selected" value="">Välj Fordon...</option>
                         </select>
                     </div>
