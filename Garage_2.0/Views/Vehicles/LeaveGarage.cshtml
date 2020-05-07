@@ -5,10 +5,12 @@
 }
 
 <h1>Kvitto</h1>
-
-<div>
     <hr />
-    <h3>@Model.RegNum har lämnat Garaget</h3>
+<div id="receipt">
+    <p>- Garage 2.0 - <br />
+    Kassör: Jörgen <br />
+    </p>
+    <h5>@Html.DisplayFor(model => model.RegNum) har lämnat Garaget</h5>
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.VehicleType)
@@ -65,9 +67,12 @@
                 @Html.DisplayFor(model => model.TotalTime)
             </dd>*@
     </dl>
+    <p class="text-center">
+        Välkommen Åter!
+    </p>
+</div>
     <hr />
-    <h3>Tack för att du parkerat hos oss!</h3>
+        <h5>- Tack för att du parkerat hos oss! -</h5>
         <a asp-action="GetOverviewModel">Tillbaka till översikt</a>
 
-</div>
 
