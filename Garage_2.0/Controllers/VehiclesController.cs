@@ -153,9 +153,10 @@ namespace Garage_2._0.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var vehicle = await _context.Vehicle.FindAsync(id);
-            ////_context.Vehicle.Remove(vehicle);
+            var temp = ToUnPark(vehicle);
+            _context.Vehicle.Remove(vehicle);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(GetOverviewModel));
+            return RedirectToAction(nameof(LeaveGarage),temp);
         }
 
         private bool VehicleExists(int id)
@@ -218,9 +219,27 @@ namespace Garage_2._0.Controllers
         {
             return View(vehicle);
         }
-        public IActionResult LeaveGarage(Vehicle vehicle)
+
+        public IActionResult LeaveGarage(UnParkViewModel vehicle)
         {
             return View(vehicle);
+        }
+
+        public UnParkViewModel ToUnPark(Vehicle vehicle)
+        {
+            var ret = new UnParkViewModel
+            {
+                RegNum = vehicle.RegNum,
+                VehicleType = vehicle.VehicleType,
+                ArrivalTime = vehicle.ArrivalTime,
+                DepartureTime = DateTime.Now
+            };
+
+            ret.TotalParkedTime = TimeSpan.FromMinutes(ret.DepartureTime.Ticks - ret.ArrivalTime.Ticks);
+
+            ret.Price = 0;
+
+            return ret;
         }
     }
 }
