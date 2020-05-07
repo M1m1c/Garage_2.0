@@ -7,27 +7,12 @@ ViewData["Title"] = "Edit";
 
 <h1>Redigera</h1>
 
-@*<h4>Parkerat fordon @Model.RegNum</h4>*@
+<h4>@Model.RegNum</h4>
 <hr />
 <div>
     <div class="row">
-        <div class="col">
-            @* Fungerar med model vehicle *@
-            <div class="row">
-            <div class="col-sm-2">
-            @Html.DisplayNameFor(model => model.VehicleType)
-            </div>
-            <div class="col-sm-10">
-            @Html.DisplayFor(model => model.VehicleType)
-            </div>
-            <div class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ArrivalTime)
-            </div>
-            <div class="col-sm-10">
-            @Html.DisplayFor(model => model.ArrivalTime)
-            </div>
-            </div>
 
+        <div class="col-sm">
 
             <form asp-action="Edit">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -59,9 +44,26 @@ ViewData["Title"] = "Edit";
                     <input type="submit" value="Spara" class="btn btn-primary" />
                 </div>
                 <div>
-                <a asp-action="GetOverviewModel">Tillbaka till översikt</a>
+                    <a asp-action="GetOverviewModel">Tillbaka till översikt</a>
                 </div>
             </form>
+        </div>
+        <div class="col-sm">
+            @* Fungerar med model vehicle *@
+            <div class="row">
+                <div class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.VehicleType)
+                </div>
+                <div class="col-sm-8">
+                    @Html.DisplayFor(model => model.VehicleType)
+                </div>
+                <div class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.ArrivalTime)
+                </div>
+                <div class="col-sm-8">
+                    @Html.DisplayFor(model => model.ArrivalTime)
+                </div>
+            </div>
         </div>
     </div>
 </div>
