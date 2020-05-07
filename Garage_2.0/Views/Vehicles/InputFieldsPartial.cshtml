@@ -3,7 +3,7 @@
     <div class="form-group">
         @* asp-items="@Model.Colors" *@
         <label asp-for="Color" class="control-label"></label>
-        <select asp-for="Color" class="form-control">
+        <select asp-items="@Html.GetEnumSelectList<EnumColor>()" class="form-control">
             <option selected="selected" value="">Välj Färg...</option>
         </select>
     </div>
