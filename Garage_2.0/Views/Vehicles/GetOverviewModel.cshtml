@@ -9,7 +9,22 @@
 <p>
     <a asp-action="Create">Parkera nytt fordon</a>
 </p>
-<table class="table">
+
+<div class="input-group mx-3">
+  
+        <input type="text" class="form-control" placeholder="Sök fordon i Garaget...">
+
+        <div class="input-group-append px-2">
+            <select @*asp-for="VehicleType" asp-items="@Html.GetEnumSelectList<EnumType>()"*@ >
+                <option selected="selected" value="">Välj Fordon...</option>
+            </select>
+            <button class="btn btn-outline-secondary px-4" type="button">
+                <span class="glyphicon glyphicon-search"></span>Sök
+            </button>
+        </div>
+</div>
+
+<table class="table my-3">
     <thead>
         <tr>
             <th>
