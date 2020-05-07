@@ -12,7 +12,6 @@
         <div class="row">
             <div class="col">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <input type="hidden" asp-for="Id" />
 
                 <div class="form-group">
                     <label asp-for="RegNum" class="control-label"></label>
@@ -21,13 +20,13 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="VehicleType" class="control-label"></label>
-                    <select asp-items="@Html.GetEnumSelectList<EnumType>()" class="form-control">
+                    <select asp-for="VehicleType" asp-items="@Html.GetEnumSelectList<EnumType>()" class="form-control">
                         <option selected="selected" value="">Välj Fordon...</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label asp-for="Color" class="control-label"></label>
-                    <select asp-items="@Html.GetEnumSelectList<EnumColor>()" class="form-control">
+                    <select asp-for="Color" asp-items="@Html.GetEnumSelectList<EnumColor>()" class="form-control">
                         <option selected="selected" value="">Välj Färg...</option>
                     </select>
                 </div>

@@ -35,7 +35,7 @@ ViewData["Title"] = "Edit";
 
                 <div class="form-group">
                     <label asp-for="Color" class="control-label"></label>
-                    <select asp-items="@Html.GetEnumSelectList<EnumColor>()" class="form-control">
+                    <select asp-for="Color" asp-items="@Html.GetEnumSelectList<EnumColor>()" class="form-control">
                         <option selected="selected" value="">Välj Färg...</option>
                     </select>
                 </div>
