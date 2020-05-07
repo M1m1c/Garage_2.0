@@ -62,7 +62,8 @@ namespace Garage_2._0.Controllers
             {
                 _context.Add(vehicle);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                //TODO Change to parked and make park method
+                return RedirectToAction(nameof(GetOverviewModel));
             }
             return View(vehicle);
         }
@@ -113,7 +114,7 @@ namespace Garage_2._0.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(GetOverviewModel));
             }
             return View(vehicle);
         }
@@ -144,7 +145,7 @@ namespace Garage_2._0.Controllers
             var vehicle = await _context.Vehicle.FindAsync(id);
             _context.Vehicle.Remove(vehicle);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(GetOverviewModel));
         }
 
         private bool VehicleExists(int id)
