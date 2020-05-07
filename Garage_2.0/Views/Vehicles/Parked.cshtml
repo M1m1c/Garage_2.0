@@ -1,0 +1,13 @@
+﻿@model Garage_2._0.Models.VehicleOverviewModel
+
+<div>
+    <h2>Du har parkerat!</h2>
+
+    <h5>@Model.RegNum har parkerats i garaget</h5>
+    <h5>Tid: @Model.ArrivalTime</h5>
+</div>
+
+<div>
+    <a asp-action="GetOverviewModel">Tillbaka till översikt </a> | 
+    <a class="nav-link text-dark" asp-area="" asp-controller="Vehicles" asp-action="Create"> Parkera fordon</a>
+</div>
