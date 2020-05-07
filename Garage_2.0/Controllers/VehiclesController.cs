@@ -57,14 +57,22 @@ namespace Garage_2._0.Controllers
         public async Task<IActionResult> Create([Bind("VehicleType,RegNum,Color,Brand,Model,Wheels,ArrivalTime")] Vehicle vehicle)
         {
             vehicle.ArrivalTime = DateTime.Now;
-           
+
             if (ModelState.IsValid)
             {
-                _context.Add(vehicle);
-                await _context.SaveChangesAsync();
-                //TODO Change to parked and make park method
-                return RedirectToAction(nameof(GetOverviewModel));
+                vehicle.RegNum = vehicle.RegNum.ToUpper();
+                vehicle.Brand = vehicle.Brand.ToUpper();
+                vehicle.Model = vehicle.Model.ToUpper();
+
+                if (_context.Vehicle.Any(v => v.RegNum == vehicle.RegNum) == false)
+                {
+                    _context.Add(vehicle);
+                    await _context.SaveChangesAsync();
+                    //TODO Change to parked and make park method
+                    return RedirectToAction(nameof(Parked), ToOverviewModel(vehicle));
+                }
             }
+
             return View(vehicle);
         }
 
@@ -155,7 +163,7 @@ namespace Garage_2._0.Controllers
             return _context.Vehicle.Any(e => e.Id == id);
         }
 
-       public async Task<IActionResult> GetOverviewModel()
+        public async Task<IActionResult> GetOverviewModel()
         {
             var model = _context.Vehicle.Select(v => ToOverviewModel(v));
 
@@ -181,7 +189,7 @@ namespace Garage_2._0.Controllers
             }
 
             var vehicle = await _context.Vehicle.FirstOrDefaultAsync(v => v.Id == id);
-                
+
             if (vehicle == null)
             {
                 return NotFound();
@@ -204,6 +212,11 @@ namespace Garage_2._0.Controllers
                 Color = v.Color,
                 Model = v.Model
             };
+        }
+
+        public IActionResult Parked(VehicleOverviewModel vehicle)
+        {
+            return View(vehicle);
         }
     }
 }
