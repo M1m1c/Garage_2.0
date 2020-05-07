@@ -152,15 +152,20 @@ namespace Garage_2._0.Controllers
 
        public async Task<IActionResult> GetOverviewModel()
         {
-            var model = _context.Vehicle.Select(v => new VehicleOverviewModel
-            {
-                Id= v.Id,
-                VehicleType = v.VehicleType,
-                RegNum = v.RegNum,
-                ArrivalTime=v.ArrivalTime
-            });
+            var model = _context.Vehicle.Select(v => ToOverviewModel(v));
 
             return View(await model.ToListAsync());
+        }
+
+        static public VehicleOverviewModel ToOverviewModel(Vehicle v)
+        {
+            return new VehicleOverviewModel
+            {
+                Id = v.Id,
+                VehicleType = v.VehicleType,
+                RegNum = v.RegNum,
+                ArrivalTime = v.ArrivalTime
+            };
         }
 
         public async Task<IActionResult> GetDetailViewModel(int? id)
@@ -177,16 +182,23 @@ namespace Garage_2._0.Controllers
                 return NotFound();
             }
 
-            var model = new VehicleDetailViewModel
-            {
-                Id = vehicle.Id,
-                Wheels = vehicle.Wheels,
-                Brand = vehicle.Brand,
-                Color = vehicle.Color,
-                Model = vehicle.Model
-            };
+            var model = ToDetailView(vehicle);
 
             return View(model);
+        }
+
+        static public VehicleDetailViewModel ToDetailView(Vehicle v)
+        {
+            if (v == null) { return null; }
+
+            return new VehicleDetailViewModel
+            {
+                Id = v.Id,
+                Wheels = v.Wheels,
+                Brand = v.Brand,
+                Color = v.Color,
+                Model = v.Model
+            };
         }
     }
 }
