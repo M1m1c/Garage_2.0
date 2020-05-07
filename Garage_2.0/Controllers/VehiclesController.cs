@@ -244,5 +244,15 @@ namespace Garage_2._0.Controllers
 
             return ret;
         }
+
+        public async Task<IActionResult> SearchFilter(string regNum,int? vType)
+        {
+            var model = string.IsNullOrWhiteSpace(regNum) ?
+                _context.Vehicle.ForEachAsync(v => ToOverviewModel(v)) :
+                _context.Vehicle.Where(v => v.RegNum.StartsWith(regNum.ToUpper())).ForEachAsync(v=> ToOverviewModel(v));
+
+
+            return View(nameof(GetOverviewModel), model);
+        }
     }
 }
