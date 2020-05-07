@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ namespace Garage_2._0.Models
 
         public DateTime DepartureTime { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:d\\ hh\\:mm}")]
         public TimeSpan TotalParkedTime { get; set; }
 
         public Decimal Price { get; set; }

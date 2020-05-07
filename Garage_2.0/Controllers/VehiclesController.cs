@@ -235,9 +235,12 @@ namespace Garage_2._0.Controllers
                 DepartureTime = DateTime.Now
             };
 
-            ret.TotalParkedTime = TimeSpan.FromMinutes(ret.DepartureTime.Ticks - ret.ArrivalTime.Ticks);
+           
+            ret.TotalParkedTime = ret.DepartureTime - ret.ArrivalTime;
+            
 
-            ret.Price = 0;
+            ret.Price = ret.TotalParkedTime.Hours * 100;
+            ret.Price += ret.TotalParkedTime.Days * 24 * 100;
 
             return ret;
         }
