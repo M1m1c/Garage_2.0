@@ -247,12 +247,16 @@ namespace Garage_2._0.Controllers
 
         public async Task<IActionResult> SearchFilter(string regNum,int? vType)
         {
-            var model = string.IsNullOrWhiteSpace(regNum) ?
-                _context.Vehicle.ForEachAsync(v => ToOverviewModel(v)) :
-                _context.Vehicle.Where(v => v.RegNum.StartsWith(regNum.ToUpper())).ForEachAsync(v=> ToOverviewModel(v));
+            var vehicles = string.IsNullOrWhiteSpace(regNum) ?
+                _context.Vehicle :
+                _context.Vehicle.Where(v => v.RegNum.StartsWith(regNum.ToUpper()));
 
+            
+            //TODO filtera enligt fordonstyp också om den inte är null
 
-            return View(nameof(GetOverviewModel), model);
+            var overview = vehicles.Select(v => ToOverviewModel(v));
+
+            return View(nameof(GetOverviewModel), await overview.ToListAsync());
         }
     }
 }
