@@ -23,6 +23,5 @@ namespace Garage_2._0.Models
         [Display(Name = "Modell")]
         public string Model { get; set; }
 
-        IEnumerable<SelectListItem> Colors;
     }
 }
