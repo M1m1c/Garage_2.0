@@ -101,6 +101,8 @@ namespace Garage_2._0.Controllers
                 try
                 {
                     _context.Update(vehicle);
+                    _context.Entry(vehicle).Property(p => p.ArrivalTime).IsModified = false;
+                    _context.Entry(vehicle).Property(p => p.VehicleType).IsModified = false;
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -143,7 +145,7 @@ namespace Garage_2._0.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var vehicle = await _context.Vehicle.FindAsync(id);
-            _context.Vehicle.Remove(vehicle);
+            ////_context.Vehicle.Remove(vehicle);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(GetOverviewModel));
         }
