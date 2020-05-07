@@ -2,7 +2,7 @@
 @model Garage_2._0.Models.Vehicle
 
 @{
-    ViewData["Title"] = "Edit";
+ViewData["Title"] = "Edit";
 }
 
 <h1>Redigera</h1>
@@ -11,61 +11,60 @@
 <hr />
 <div>
     <div class="row">
-        
-    @* Fungerar med model vehicle *@
-        <div class="d-inline-block">
+        <div class="col">
+            @* Fungerar med model vehicle *@
+            <div class="row">
             <div class="col-sm-2">
-                @Html.DisplayNameFor(model => model.VehicleType)
+            @Html.DisplayNameFor(model => model.VehicleType)
             </div>
             <div class="col-sm-10">
-                @Html.DisplayFor(model => model.VehicleType)
+            @Html.DisplayFor(model => model.VehicleType)
             </div>
             <div class="col-sm-2">
-                @Html.DisplayNameFor(model => model.ArrivalTime)
+            @Html.DisplayNameFor(model => model.ArrivalTime)
             </div>
             <div class="col-sm-10">
-                @Html.DisplayFor(model => model.ArrivalTime)
+            @Html.DisplayFor(model => model.ArrivalTime)
             </div>
             </div>
 
 
-            <div class="d-inline-block">
-                <form asp-action="Edit">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <input type="hidden" asp-for="Id" />
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
 
-                    <div class="form-group">
-                        <label asp-for="Color" class="control-label"></label>
-                        <select asp-items="@Html.GetEnumSelectList<EnumColor>()" class="form-control">
-                            <option selected="selected" value="">Välj Färg...</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Brand" class="control-label"></label>
-                        <input asp-for="Brand" class="form-control" />
-                        <span asp-validation-for="Brand" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Model" class="control-label"></label>
-                        <input asp-for="Model" class="form-control" />
-                        <span asp-validation-for="Model" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Wheels" class="control-label"></label>
-                        <input asp-for="Wheels" class="form-control" />
-                        <span asp-validation-for="Wheels" class="text-danger"></span>
-                    </div>
+                <div class="form-group">
+                    <label asp-for="Color" class="control-label"></label>
+                    <select asp-items="@Html.GetEnumSelectList<EnumColor>()" class="form-control">
+                        <option selected="selected" value="">Välj Färg...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Brand" class="control-label"></label>
+                    <input asp-for="Brand" class="form-control" />
+                    <span asp-validation-for="Brand" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Model" class="control-label"></label>
+                    <input asp-for="Model" class="form-control" />
+                    <span asp-validation-for="Model" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Wheels" class="control-label"></label>
+                    <input asp-for="Wheels" class="form-control" />
+                    <span asp-validation-for="Wheels" class="text-danger"></span>
+                </div>
 
-                    <div class="form-group">
-                        <input type="submit" value="Spara" class="btn btn-primary" />
-                    </div>
-                </form>
-            </div>
-            <div>
+                <div class="form-group">
+                    <input type="submit" value="Spara" class="btn btn-primary" />
+                </div>
+                <div>
                 <a asp-action="GetOverviewModel">Tillbaka till översikt</a>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
-    @section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    }
+</div>
+@section Scripts {
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
