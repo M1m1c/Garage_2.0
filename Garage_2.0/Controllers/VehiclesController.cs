@@ -218,5 +218,9 @@ namespace Garage_2._0.Controllers
         {
             return View(vehicle);
         }
+        public IActionResult LeaveGarage(Vehicle vehicle)
+        {
+            return View(vehicle);
+        }
     }
 }
