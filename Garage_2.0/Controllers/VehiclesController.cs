@@ -178,6 +178,9 @@ namespace Garage_2._0.Controllers
         {
             switch (column)
             {
+                default:
+                    return _context.Vehicle.OrderBy(v => v.Id);
+                    break;
                 case Column.EArrivalTime:
                    // GetT<DateTime>(_context.Vehicle.FirstOrDefault());
                     return _context.Vehicle.OrderBy(v => v.ArrivalTime);
@@ -189,7 +192,6 @@ namespace Garage_2._0.Controllers
                     return _context.Vehicle.OrderBy(v => v.VehicleType);
                     break;
             }
-            return null;
         }
 
         /*private T GetT<T>(Vehicle v)
