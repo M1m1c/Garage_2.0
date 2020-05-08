@@ -74,6 +74,11 @@ namespace Garage_2._0.Controllers
 
             return View(vehicle);
         }
+        [HttpPost]
+        public JsonResult IsAlreadySigned(string RegNum)
+        {
+            return Json(_context.Vehicle.Any(v => v.RegNum == RegNum) == false);
+        }
 
         // GET: Vehicles/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -165,22 +170,24 @@ namespace Garage_2._0.Controllers
 
         public async Task<IActionResult> GetOverviewModel(string propertyName, bool isAscending)
         {
-            ViewData["TypeSortParam"] = string.IsNullOrEmpty(propertyName) ? "VehicleType" : "";
-            ViewData["RegSortParam"] = string.IsNullOrEmpty(propertyName) ? "RegNum" : "";
-            ViewData["TimeSortParam"] = string.IsNullOrEmpty(propertyName) ? "ArrivalTime" : "";
+            ViewData["TypeSortParam"] =  "VehicleType";
+            ViewData["RegSortParam"] = "RegNum";
+            ViewData["TimeSortParam"] = "ArrivalTime";
+
+            ViewData["IsAsendingSortParam"] = isAscending ? false : true;
 
             var orderedVehicles = DetermineColumnSort(propertyName, isAscending);
 
-            var model = orderedVehicles.Select(v => ToOverviewModel(v));
+            var model = orderedVehicles.Result.Select(v => ToOverviewModel(v));
 
             return View(model);
         }
 
         //TODO 
-        private IEnumerable<Vehicle> DetermineColumnSort(string propertyName, bool isAscending)
+        private async Task<IEnumerable<Vehicle>> DetermineColumnSort(string propertyName, bool isAscending)
         {
             List<Vehicle> temp;
-            var t = _context.Vehicle.ToList();
+            var t = await _context.Vehicle.ToListAsync();
             
             
             if (string.IsNullOrEmpty(propertyName) == false)
@@ -207,7 +214,7 @@ namespace Garage_2._0.Controllers
             return new VehicleOverviewModel
             {
                 Id = v.Id,
-                VehicleType = v.VehicleType,
+                VehicleType = (EnumType)v.VehicleType,
                 RegNum = v.RegNum,
                 ArrivalTime = v.ArrivalTime
             };
@@ -239,9 +246,9 @@ namespace Garage_2._0.Controllers
             return new VehicleDetailViewModel
             {
                 Id = v.Id,
-                Wheels = v.Wheels,
+                Wheels = (int)v.Wheels,
                 Brand = v.Brand,
-                Color = v.Color,
+                Color = (EnumColor)v.Color,
                 Model = v.Model
             };
         }
@@ -261,7 +268,7 @@ namespace Garage_2._0.Controllers
             var ret = new UnParkViewModel
             {
                 RegNum = vehicle.RegNum,
-                VehicleType = vehicle.VehicleType,
+                VehicleType = (EnumType)vehicle.VehicleType,
                 ArrivalTime = vehicle.ArrivalTime,
                 DepartureTime = DateTime.Now
             };

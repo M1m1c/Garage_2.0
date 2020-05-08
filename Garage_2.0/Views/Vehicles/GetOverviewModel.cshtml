@@ -34,18 +34,18 @@
         <thead>
             <tr>
                 <th >
-                    <a asp-route-propertyName="@ViewData["TypeSortParam"]" onclick="Sort('type')">
+                    <a asp-route-propertyName="@ViewData["TypeSortParam"]" asp-route-isAscending="@ViewData["IsAsendingSortParam"]" onclick="Sort('type')">
                         
                         @Html.DisplayNameFor(model => model.VehicleType)<i id="type" class="fas ml-2"></i>
                     </a>
                 </th>
                 <th>
-                    <a asp-route-propertyName="@ViewData["RegSortParam"]" onclick="Sort('regNum')">
+                    <a asp-route-propertyName="@ViewData["RegSortParam"]" asp-route-isAscending="@ViewData["IsAsendingSortParam"]" onclick="Sort('regNum')">
                         @Html.DisplayNameFor(model => model.RegNum)<i id="regNum" class="fas ml-2"></i>
                     </a>
                 </th>
                 <th>
-                    <a asp-route-propertyName="@ViewData["TimeSortParam"]" onclick="Sort('time')">
+                    <a asp-route-propertyName="@ViewData["TimeSortParam"]" asp-route-isAscending="@ViewData["IsAsendingSortParam"]" onclick="Sort('time')">
                         @Html.DisplayNameFor(model => model.ArrivalTime)<i id="time" class="fas ml-2"></i>
                     </a>
                 </th>

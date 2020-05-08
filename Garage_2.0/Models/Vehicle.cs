@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -14,8 +15,9 @@ namespace Garage_2._0.Models
         [Required(ErrorMessage = "Fordonstyp är obligatoriskt")]
         [Display(Name = "Typ")]
 
-        public EnumType VehicleType { get; set; }
+        public EnumType? VehicleType { get; set; }
 
+        [Remote("IsAlreadySigned","Vehicles",HttpMethod ="POST",ErrorMessage ="Registrerings nummer redan använt")]
         [Required(ErrorMessage = "Registreringsnummer är obligatoriskt")]
         [Display(Name = "Regnummer")]
         [MaxLength(6, ErrorMessage = "Max 6 tecken")]
@@ -23,7 +25,7 @@ namespace Garage_2._0.Models
 
         [Required(ErrorMessage = "Färg på fordonet är obligatoriskt")]
         [Display(Name ="Färg")]
-        public EnumColor Color { get; set; }
+        public EnumColor? Color { get; set; }
         
         [Required(ErrorMessage = "Fabrikat är obligatoriskt")]
         [Display(Name = "Fabrikat")]
@@ -37,7 +39,7 @@ namespace Garage_2._0.Models
         [Display(Name = "Hjul")]
         [RegularExpression(@"^([0-9]|10)$", ErrorMessage = "Ange 0-10 hjul")]
         //[Range(0,10)]
-        public int Wheels { get; set; }
+        public int? Wheels { get; set; }
 
         [Display(Name = "Ankomst")]
         public DateTime ArrivalTime { get; set; }
