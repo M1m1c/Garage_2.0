@@ -166,33 +166,37 @@ namespace Garage_2._0.Controllers
 
         public async Task<IActionResult> GetOverviewModel(string propertyName, bool isAscending)
         {
+            ViewData["TypeSortParam"] = string.IsNullOrEmpty(propertyName) ? "VehicleType" : "";
+            ViewData["RegSortParam"] = string.IsNullOrEmpty(propertyName) ? "RegNum" : "";
+            ViewData["TimeSortParam"] = string.IsNullOrEmpty(propertyName) ? "ArrivalTime" : "";
 
             var orderedVehicles = DetermineColumnSort(propertyName, isAscending);
 
             var model = orderedVehicles.Select(v => ToOverviewModel(v));
 
-            return View(await model.ToListAsync());
+            return View(model);
         }
 
-        private IOrderedQueryable<Vehicle> DetermineColumnSort(string propertyName, bool isAscending)
+        private IEnumerable<Vehicle> DetermineColumnSort(string propertyName, bool isAscending)
         {
-            IOrderedQueryable<Vehicle> temp;
+            List<Vehicle> temp;
+            var t = _context.Vehicle.ToList();
+            
             
             if (string.IsNullOrEmpty(propertyName) == false)
             {
                 if (isAscending)
                 {
-                    temp = _context.Vehicle.OrderBy(v => v.GetType().GetProperty(propertyName));
+                    temp = t.OrderBy(v => v.GetType().GetProperty(propertyName)).ToList();
                 }
                 else
                 {
-                    temp = _context.Vehicle.OrderByDescending(v => v.GetType().GetProperty(propertyName));
-                }
-               
+                    temp = t.OrderByDescending(v => v.GetType().GetProperty(propertyName)).ToList();
+                }             
             }
             else
             {
-                temp= _context.Vehicle.OrderBy(v => v.Id); ;
+                temp = t.OrderBy(v => v.Id).ToList();
             }          
             return temp;          
         }
