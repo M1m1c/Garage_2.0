@@ -1,0 +1,69 @@
+﻿@model Vehicle
+@{
+    ViewData["Title"] = "Statistics";
+}
+@*- antal fordon
+- antal per typ (färg...)
+- totalt antal hjul
+- total intäkt av aktuella fordon
+- Annat:
+Vanligaste märke, färg...
+
+*@
+
+<h1><i class="fas fa-folder-open mr-2"></i>Statistik</h1>
+<hr />
+<div>
+    <div class="row">
+        <div class="col-sm">
+            <dl class="row">
+                <dt class="col-sm-8">Fordon</dt>
+                <dd class="col-sm-4">200</dd>
+                                  
+                <dt class="col-sm-8">Bilar</dt>
+                <dd class="col-sm-4">200</dd>
+                                  
+                <dt class="col-sm-8">Bussar</dt>
+                <dd class="col-sm-4">200</dd>
+                                  
+                <dt class="col-sm-8">Båtar</dt>
+                <dd class="col-sm-4">200</dd>
+                                  
+                <dt class="col-sm-8">Cyklar</dt>
+                <dd class="col-sm-4">200</dd>
+                                  
+                <dt class="col-sm-8">Flygplan</dt>
+                <dd class="col-sm-4">200</dd>
+                                  
+                <dt class="col-sm-8">Motorcyklar</dt>
+                <dd class="col-sm-4">200</dd>
+            </dl>
+        </div>
+   
+
+        <div class="col-sm">
+            <dl class="row">
+                <dt class="col-sm-8">Dagens intäkter</dt>
+                <dd class="col-sm-4">200</dd>
+
+                <dt class="col-sm-8">Totalt antal hjul</dt>
+                <dd class="col-sm-4">200</dd>
+
+                <dt class="col-sm-8">Vanligaste märket</dt>
+                <dd class="col-sm-4">200</dd>
+
+                <dt class="col-sm-8">Vanligaste färgen</dt>
+                <dd class="col-sm-4">200</dd>
+            </dl>
+            <div>
+                Senast Uppdaterat:
+                <i>00:00:00 1 Jan 2020</i>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<div>
+    <a asp-action="GetOverviewModel">Tillbaka till översikt</a>
+</div>
