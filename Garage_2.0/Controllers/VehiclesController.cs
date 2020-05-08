@@ -251,8 +251,7 @@ namespace Garage_2._0.Controllers
                 _context.Vehicle :
                 _context.Vehicle.Where(v => v.RegNum.StartsWith(regNum.ToUpper()));
 
-            
-            //TODO filtera enligt fordonstyp också om den inte är null
+            vehicles = vType == null ? vehicles : vehicles.Where(v => v.VehicleType == (EnumType)vType);
 
             var overview = vehicles.Select(v => ToOverviewModel(v));
 
