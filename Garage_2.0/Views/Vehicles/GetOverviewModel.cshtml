@@ -33,14 +33,21 @@
     <table class="table my-3">
         <thead>
             <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.VehicleType)
+                <th >
+                    <a onclick="Sort('type')">
+                        
+                        @Html.DisplayNameFor(model => model.VehicleType)<i id="type" class="fas ml-2"></i>
+                    </a>
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.RegNum)
+                    <a onclick="Sort('regNum')">
+                        @Html.DisplayNameFor(model => model.RegNum)<i id="regNum" class="fas ml-2"></i>
+                    </a>
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ArrivalTime)
+                    <a onclick="Sort('time')">
+                        @Html.DisplayNameFor(model => model.ArrivalTime)<i id="time" class="fas ml-2"></i>
+                    </a>
                 </th>
                 <th></th>
             </tr>
@@ -68,3 +75,12 @@
             }
         </tbody>
     </table>
+    <script>
+        function Sort(column) {
+          
+            $(".fas").removeClass("fa-sort-down");
+            $("#" + column).toggleClass("fa-sort-down");
+        }
+        
+
+    </script>
