@@ -3,27 +3,33 @@
 @{
     ViewData["Title"] = "GetOverviewModel";
 }
+<div class="row">
+    <div class="col">
+        <h1>Garaget</h1>
 
-<h1>Garaget</h1>
-
-<p>
-    <a asp-action="Create"><i class="fas fa-parking mr-1"></i>Parkera nytt fordon </a>
-</p>
-<form asp-action="SearchFilter">
-    <div class="input-group">
-
-        <input type="text" name="regNum" @*asp-for="RegNum"*@ class="form-control" placeholder="Sök fordon i Garaget...">
-
-        <div class="input-group-append">
-            <select @*asp-for="VehicleType" asp-items="@Html.GetEnumSelectList<EnumType>()"*@>
-                <option class=" px-2" selected="selected" value="">Välj Fordonstyp...</option>
-            </select>
-            <button type="submit" class="btn btn-outline-secondary px-4">
-                Sök<i class="fas fa-search"></i>
-            </button>
-        </div>
+        <p>
+            <a asp-action="Create"><i class="fas fa-parking mr-1"></i>Parkera nytt fordon </a>
+        </p>
     </div>
-</form>
+    <div class="col">
+        <form asp-action="SearchFilter">
+            <div class="input-group">
+
+                <input type="text" name="regNum" @*asp-for="RegNum"*@ class="form-control" placeholder="Sök fordon i Garaget...">
+
+                <div class="input-group-append">
+                    <select class=" px-2" @*asp-for="VehicleType" asp-items="@Html.GetEnumSelectList<EnumType>()"*@>
+                        <option selected="selected" value="">Välj Fordonstyp...</option>
+                    </select>
+                    <button type="submit" class="btn btn-outline-primary px-4 font-weight-bold">
+                        Sök<i class="fas fa-search ml-2"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
     <table class="table my-3">
         <thead>
             <tr>
