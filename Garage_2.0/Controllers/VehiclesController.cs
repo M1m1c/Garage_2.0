@@ -164,41 +164,38 @@ namespace Garage_2._0.Controllers
             return _context.Vehicle.Any(e => e.Id == id);
         }
 
-        public async Task<IActionResult> GetOverviewModel(Column column)
+        public async Task<IActionResult> GetOverviewModel(string propertyName, bool isAscending)
         {
 
-            var orderedVehicles = DetermineColumnSort(column);
+            var orderedVehicles = DetermineColumnSort(propertyName, isAscending);
 
             var model = orderedVehicles.Select(v => ToOverviewModel(v));
 
             return View(await model.ToListAsync());
         }
 
-        private IOrderedQueryable<Vehicle> DetermineColumnSort(Column column)
+        private IOrderedQueryable<Vehicle> DetermineColumnSort(string propertyName, bool isAscending)
         {
-            switch (column)
+            IOrderedQueryable<Vehicle> temp;
+            
+            if (string.IsNullOrEmpty(propertyName) == false)
             {
-                default:
-                    return _context.Vehicle.OrderBy(v => v.Id);
-                    break;
-                case Column.EArrivalTime:
-                   // GetT<DateTime>(_context.Vehicle.FirstOrDefault());
-                    return _context.Vehicle.OrderBy(v => v.ArrivalTime);
-                    break;
-                case Column.ERegNum:
-                    return _context.Vehicle.OrderBy(v => v.RegNum);
-                    break;
-                case Column.EVehicleType:
-                    return _context.Vehicle.OrderBy(v => v.VehicleType);
-                    break;
+                if (isAscending)
+                {
+                    temp = _context.Vehicle.OrderBy(v => v.GetType().GetProperty(propertyName));
+                }
+                else
+                {
+                    temp = _context.Vehicle.OrderByDescending(v => v.GetType().GetProperty(propertyName));
+                }
+               
             }
+            else
+            {
+                temp= _context.Vehicle.OrderBy(v => v.Id); ;
+            }          
+            return temp;          
         }
-
-        /*private T GetT<T>(Vehicle v)
-        {
-           var ret= v.GetType().GetProperties().FirstOrDefault(p => p.GetType() == typeof(T)).GetType();
-            return ret;
-        }*/
 
 
         static public VehicleOverviewModel ToOverviewModel(Vehicle v)
