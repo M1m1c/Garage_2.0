@@ -4,7 +4,7 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Lämna Garage</h1>
+<h1><i class="fas fa-sign-out-alt mr-2"></i>Lämna Garage</h1>
 
 <div>
     <h4>@Model.RegNum</h4>
@@ -57,7 +57,7 @@
 <h5>Är du säker på att du vill lämna garaget?</h5>
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="GetOverviewModel">Tillbaka till översikt</a>
+        <input type="submit" value="Lämna" class="btn btn-primary" /> 
+        <a class="btn btn-outline-secondary btn-light" asp-action="GetOverviewModel">Stanna</a>
     </form>
 </div>

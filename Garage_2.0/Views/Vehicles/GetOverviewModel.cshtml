@@ -7,7 +7,7 @@
 <h1>Garaget</h1>
 
 <p>
-    <a asp-action="Create">Parkera nytt fordon</a>
+    <a asp-action="Create"><i class="fas fa-parking mr-1"></i>Parkera nytt fordon </a>
 </p>
 <form asp-action="SearchFilter">
     <div class="input-group">
@@ -16,10 +16,10 @@
 
         <div class="input-group-append">
             <select @*asp-for="VehicleType" asp-items="@Html.GetEnumSelectList<EnumType>()"*@>
-                <option class=" px-2" selected="selected" value="">Välj Fordon...</option>
+                <option class=" px-2" selected="selected" value="">Välj Fordonstyp...</option>
             </select>
-            <button type="submit" class="btn btn-outline-secondary px-4" type="button">
-                <i class="fa fa-search">&emsp;Search</i>Sök
+            <button type="submit" class="btn btn-outline-secondary px-4">
+                Sök<i class="fas fa-search"></i>
             </button>
         </div>
     </div>
