@@ -23,12 +23,14 @@
                     <select asp-for="VehicleType" asp-items="@Html.GetEnumSelectList<EnumType>()" class="form-control">
                         <option selected="selected" value="">Välj Fordon...</option>
                     </select>
+                    <span asp-validation-for="VehicleType" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Color" class="control-label"></label>
                     <select asp-for="Color" asp-items="@Html.GetEnumSelectList<EnumColor>()" class="form-control">
                         <option selected="selected" value="">Välj Färg...</option>
                     </select>
+                    <span asp-validation-for="Color" class="text-danger"></span>
                 </div>
             </div>
             <div class="col">

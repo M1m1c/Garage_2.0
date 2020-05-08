@@ -68,7 +68,6 @@ namespace Garage_2._0.Controllers
                 {
                     _context.Add(vehicle);
                     await _context.SaveChangesAsync();
-                    //TODO Change to parked and make park method
                     return RedirectToAction(nameof(Parked), ToOverviewModel(vehicle));
                 }
             }
@@ -177,6 +176,7 @@ namespace Garage_2._0.Controllers
             return View(model);
         }
 
+        //TODO 
         private IEnumerable<Vehicle> DetermineColumnSort(string propertyName, bool isAscending)
         {
             List<Vehicle> temp;
@@ -187,11 +187,11 @@ namespace Garage_2._0.Controllers
             {
                 if (isAscending)
                 {
-                    temp = t.OrderBy(v => v.GetType().GetProperty(propertyName)).ToList();
+                    temp = t.OrderBy(v => v.GetType().GetProperty(propertyName).GetValue(v,null)).ToList();
                 }
                 else
                 {
-                    temp = t.OrderByDescending(v => v.GetType().GetProperty(propertyName)).ToList();
+                    temp = t.OrderByDescending(v => v.GetType().GetProperty(propertyName).GetValue(v, null)).ToList();
                 }             
             }
             else
