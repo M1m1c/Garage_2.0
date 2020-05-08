@@ -164,12 +164,40 @@ namespace Garage_2._0.Controllers
             return _context.Vehicle.Any(e => e.Id == id);
         }
 
-        public async Task<IActionResult> GetOverviewModel()
+        public async Task<IActionResult> GetOverviewModel(Column column)
         {
-            var model = _context.Vehicle.Select(v => ToOverviewModel(v));
+
+            var orderedVehicles = DetermineColumnSort(column);
+
+            var model = orderedVehicles.Select(v => ToOverviewModel(v));
 
             return View(await model.ToListAsync());
         }
+
+        private IOrderedQueryable<Vehicle> DetermineColumnSort(Column column)
+        {
+            switch (column)
+            {
+                case Column.EArrivalTime:
+                   // GetT<DateTime>(_context.Vehicle.FirstOrDefault());
+                    return _context.Vehicle.OrderBy(v => v.ArrivalTime);
+                    break;
+                case Column.ERegNum:
+                    return _context.Vehicle.OrderBy(v => v.RegNum);
+                    break;
+                case Column.EVehicleType:
+                    return _context.Vehicle.OrderBy(v => v.VehicleType);
+                    break;
+            }
+            return null;
+        }
+
+        /*private T GetT<T>(Vehicle v)
+        {
+           var ret= v.GetType().GetProperties().FirstOrDefault(p => p.GetType() == typeof(T)).GetType();
+            return ret;
+        }*/
+
 
         static public VehicleOverviewModel ToOverviewModel(Vehicle v)
         {
@@ -256,6 +284,6 @@ namespace Garage_2._0.Controllers
             var overview = vehicles.Select(v => ToOverviewModel(v));
 
             return View(nameof(GetOverviewModel), await overview.ToListAsync());
-        }
+        } 
     }
 }
