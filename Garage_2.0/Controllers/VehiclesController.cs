@@ -294,6 +294,11 @@ namespace Garage_2._0.Controllers
             var overview = vehicles.Select(v => ToOverviewModel(v));
 
             return View(nameof(GetOverviewModel), await overview.ToListAsync());
-        } 
+        }
+
+        public IActionResult Statistics()
+        {
+            return View();
+        }
     }
 }
