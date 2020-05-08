@@ -17,7 +17,7 @@ namespace Garage_2._0.Models
 
         public EnumType? VehicleType { get; set; }
 
-        [Remote("IsAlreadySigned","Vehicles",HttpMethod ="POST",ErrorMessage ="Registrerings nummer redan använt")]
+        [Remote(action: "IsAlreadySigned", controller:"Vehicles",HttpMethod ="POST",ErrorMessage ="Registrerings nummer redan använt")]
         [Required(ErrorMessage = "Registreringsnummer är obligatoriskt")]
         [Display(Name = "Regnummer")]
         [MaxLength(6, ErrorMessage = "Max 6 tecken")]

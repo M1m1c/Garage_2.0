@@ -64,20 +64,24 @@ namespace Garage_2._0.Controllers
                 vehicle.Brand = vehicle.Brand.ToUpper();
                 vehicle.Model = vehicle.Model.ToUpper();
 
-                if (_context.Vehicle.Any(v => v.RegNum == vehicle.RegNum) == false)
-                {
+               
                     _context.Add(vehicle);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Parked), ToOverviewModel(vehicle));
-                }
+                
             }
 
             return View(vehicle);
         }
+
         [HttpPost]
         public JsonResult IsAlreadySigned(string RegNum)
         {
-            return Json(_context.Vehicle.Any(v => v.RegNum == RegNum) == false);
+            if (_context.Vehicle.Any(v => v.RegNum == RegNum) == false)
+            {
+                return Json("Registrerings nummer används redan");
+            }
+            return Json(true);
         }
 
         // GET: Vehicles/Edit/5
