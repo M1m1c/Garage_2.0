@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "GetOverviewModel";
 }
-<div class="row">
+<div class="row align-items-end">
     <div class="col">
         <h1>Garaget</h1>
 
@@ -76,11 +76,16 @@
         </tbody>
     </table>
     <script>
+        //$(".fas").removeClass("fa-sort-down");
+        //$("#" + column).toggleClass("fa-sort-down");
         function Sort(column) {
-          
-            $(".fas").removeClass("fa-sort-down");
-            $("#" + column).toggleClass("fa-sort-down");
+            if ($("#" + column).hasClass("fa-sort-down")) {
+                $(".fas").removeClass("fa-sort-down");
+                $("#" + column).addClass("fa-sort-up");
+            } else {
+                $(".fas").removeClass("fa-sort-down");
+                $(".fas").removeClass("fa-sort-up");
+                $("#" + column).addClass("fa-sort-down");
+            }
         }
-        
-
     </script>
