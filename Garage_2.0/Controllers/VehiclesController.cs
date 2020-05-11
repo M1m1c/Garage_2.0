@@ -315,7 +315,7 @@ namespace Garage_2._0.Controllers
             for (int i = 0; i <= (int)(EnumType.MC); i++)
             {
                 var type = (EnumType)i;
-                var amount = vehicles.Where(v => v.VehicleType == type).Count();
+                var amount = vehicles.Select(v => v.VehicleType == type).Count();
                 temp.Add(type, amount);
             }
 
@@ -351,7 +351,7 @@ namespace Garage_2._0.Controllers
             for (int i = 0; i <= (int)EnumColor.Annan; i++)
             {
                 EnumColor color = (EnumColor)i;
-                int count = vehicles.Where(v => v.Color == color).Count();
+                int count = vehicles.Select(v => v.Color == color).Count();
 
                 if ( count > amount) 
                 {
