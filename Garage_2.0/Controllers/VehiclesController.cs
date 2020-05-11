@@ -299,7 +299,30 @@ namespace Garage_2._0.Controllers
 
         public IActionResult Statistics()
         {
-            return View();
+            return View( new StatsViewModel {
+            AmountOfVehicleTypes = GetAmountOfVehicleTypes(_context.Vehicle),
+            TotalWheels= GetTotalWheels(_context.Vehicle),
+            });
         }
+
+        public Dictionary<EnumType,int> GetAmountOfVehicleTypes(DbSet<Vehicle> vehicles)
+        {
+            Dictionary<EnumType, int> temp = new Dictionary<EnumType, int>();
+
+            for (int i = 0; i <= (int)(EnumType.MC); i++)
+            {
+                var type = (EnumType)i;
+                var amount = vehicles.Where(v => v.VehicleType == type).Count();
+                temp.Add(type, amount);
+            }
+
+            return temp;
+        }
+
+        public int GetTotalWheels(DbSet<Vehicle> vehicles)
+        {    
+            return (int)vehicles.Select(v => v.Wheels).Sum();
+        }
+
     }
 }

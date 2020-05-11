@@ -48,11 +48,11 @@ namespace Garage_2._0.Models
     public enum EnumType
     {
         Bil,
-        MC,
         Buss,
         Båt,
+        Cykel,
         Flygplan,
-        Cykel
+        MC
     }
     
     public enum EnumColor
