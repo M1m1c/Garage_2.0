@@ -132,8 +132,15 @@ namespace Garage_2._0.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(GetOverviewModel));
+                return RedirectToAction(nameof(EditSuccess),vehicle);
             }
+            return View(vehicle);
+        }
+
+
+        public async Task<IActionResult> EditSuccess(Vehicle vehicle)
+        {
+            
             return View(vehicle);
         }
 
