@@ -299,7 +299,75 @@ namespace Garage_2._0.Controllers
 
         public IActionResult Statistics()
         {
-            return View();
+            return View( new StatsViewModel {
+            AmountOfVehicleTypes = GetAmountOfVehicleTypes(_context.Vehicle),
+            TotalWheels= GetTotalWheels(_context.Vehicle),
+            TotalGeneratedIncome= GetTotalGeneratedIncome(_context.Vehicle),
+            MostCommonColor= GetMostCommonColor(_context.Vehicle),
+            OldestParkTime= GetOldestParkTime(_context.Vehicle)
+            });
         }
+
+        public Dictionary<EnumType,int> GetAmountOfVehicleTypes(DbSet<Vehicle> vehicles)
+        {
+            Dictionary<EnumType, int> temp = new Dictionary<EnumType, int>();
+
+            for (int i = 0; i <= (int)(EnumType.MC); i++)
+            {
+                var type = (EnumType)i;
+                var amount = vehicles.Where(v => v.VehicleType == type).Count();
+                temp.Add(type, amount);
+            }
+
+            return temp;
+        }
+
+        public int GetTotalWheels(DbSet<Vehicle> vehicles)
+        {    
+            return (int)vehicles.Select(v => v.Wheels).Sum();
+        }
+
+        public float GetTotalGeneratedIncome(DbSet<Vehicle> vehicles)
+        {
+            float totalIncome = 0.0f;
+
+            foreach (var item in vehicles)
+            {
+                var timespan = DateTime.Now - item.ArrivalTime;
+
+                totalIncome += timespan.Hours * 100;
+                totalIncome += timespan.Days * 24 * 100;
+            }
+
+            return totalIncome;
+        }
+
+        public EnumColor GetMostCommonColor(DbSet<Vehicle> vehicles)
+        {
+            EnumColor currentColor = 0;
+
+            int amount = 0;
+
+            for (int i = 0; i <= (int)EnumColor.Annan; i++)
+            {
+                EnumColor color = (EnumColor)i;
+                int count = vehicles.Where(v => v.Color == color).Count();
+
+                if ( count > amount) 
+                {
+                    currentColor = color;
+                    amount = count;
+                }
+            }
+            
+
+            return currentColor;
+        }
+
+        public DateTime GetOldestParkTime(DbSet<Vehicle> vehicles)
+        {
+            return vehicles.OrderBy(v => v.ArrivalTime).FirstOrDefault().ArrivalTime;
+        }
+
     }
 }
