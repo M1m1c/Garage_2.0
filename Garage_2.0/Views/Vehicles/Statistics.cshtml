@@ -17,34 +17,24 @@ Vanligaste märke, färg...
     <div class="row">
         <div class="col-sm">
             <dl class="row">
-                <dt class="col-sm-8">@Html.DisplayNameFor(model => model.AmountOfVehicleTypes) (Totalt antal fordon)</dt>
-                <dd class="col-sm-4">@Html.DisplayFor(model => model.AmountOfVehicleTypes)</dd>
-                                  
-                <dt class="col-sm-8">Bilar</dt>
-                <dd class="col-sm-4">200</dd>
-                                  
-                <dt class="col-sm-8">Bussar</dt>
-                <dd class="col-sm-4">200</dd>
-                                  
-                <dt class="col-sm-8">Båtar</dt>
-                <dd class="col-sm-4">200</dd>
-                                  
-                <dt class="col-sm-8">Cyklar</dt>
-                <dd class="col-sm-4">200</dd>
-                                  
-                <dt class="col-sm-8">Flygplan</dt>
-                <dd class="col-sm-4">200</dd>
-                                  
-                <dt class="col-sm-8">Motorcyklar</dt>
-                <dd class="col-sm-4">200</dd>
+                <dt class="col-sm-8">Totalt antal fordon</dt>
+                <dd class="col-sm-4"></dd>
+                
+                @foreach (var type in Model.AmountOfVehicleTypes)
+                {
+                    
+                    <dt class="col-sm-8">@type.Key</dt>
+                    <dd class="col-sm-4">@type.Value</dd>
+
+                }
             </dl>
         </div>
    
 
         <div class="col-sm">
             <dl class="row">
-                <dt class="col-sm-8">@Html.DisplayNameFor(model => model.TotalGainedIncome) (Intäkter)</dt>
-                <dd class="col-sm-4">@Html.DisplayFor(model => model.AmountOfVehicleTypes)</dd>
+                <dt class="col-sm-8">@Html.DisplayNameFor(model => model.TotalGeneratedIncome) (Intäkter)</dt>
+                <dd class="col-sm-4">@Html.DisplayFor(model => model.TotalGeneratedIncome)</dd>
 
                 <dt class="col-sm-8">@Html.DisplayNameFor(model => model.TotalWheels) (Totalt antal hjul)</dt>
                 <dd class="col-sm-4">@Html.DisplayFor(model => model.TotalWheels)</dd>
@@ -52,8 +42,8 @@ Vanligaste märke, färg...
                 <dt class="col-sm-8">@Html.DisplayNameFor(model => model.MostCommonColor) (Vanligaste färgen)</dt>
                 <dd class="col-sm-4">@Html.DisplayFor(model => model.MostCommonColor) (Vanligaste färgen)</dd>
 
-                <dt class="col-sm-8">@Html.DisplayNameFor(model => model.OldestParktime) (Längsta parkeringen)</dt>
-                <dd class="col-sm-4">@Html.DisplayFor(model => model.OldestParktime)</dd>
+                <dt class="col-sm-8">@Html.DisplayNameFor(model => model.OldestParkTime) (Längsta parkeringen)</dt>
+                <dd class="col-sm-4">@Html.DisplayFor(model => model.OldestParkTime)</dd>
             </dl>
             <div>
                 Senast Uppdaterat:
