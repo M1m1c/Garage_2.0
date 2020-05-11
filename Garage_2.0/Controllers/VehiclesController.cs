@@ -161,7 +161,7 @@ namespace Garage_2._0.Controllers
             var temp = ToUnPark(vehicle);
             _context.Vehicle.Remove(vehicle);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(LeaveGarage),temp);
+            return RedirectToAction(nameof(LeaveGarage), temp);
         }
 
         private bool VehicleExists(int id)
@@ -171,7 +171,7 @@ namespace Garage_2._0.Controllers
 
         public IActionResult GetOverviewModel(string propertyName, bool isAscending)
         {
-            ViewData["TypeSortParam"] =  "VehicleType";
+            ViewData["TypeSortParam"] = "VehicleType";
             ViewData["RegSortParam"] = "RegNum";
             ViewData["TimeSortParam"] = "ArrivalTime";
 
@@ -189,24 +189,24 @@ namespace Garage_2._0.Controllers
         {
             List<Vehicle> temp;
             var t = await _context.Vehicle.ToListAsync();
-            
-            
+
+
             if (string.IsNullOrEmpty(propertyName) == false)
             {
                 if (isAscending)
                 {
-                    temp = t.OrderBy(v => v.GetType().GetProperty(propertyName).GetValue(v,null)).ToList();
+                    temp = t.OrderBy(v => v.GetType().GetProperty(propertyName).GetValue(v, null)).ToList();
                 }
                 else
                 {
                     temp = t.OrderByDescending(v => v.GetType().GetProperty(propertyName).GetValue(v, null)).ToList();
-                }             
+                }
             }
             else
             {
                 temp = t.OrderBy(v => v.Id).ToList();
-            }          
-            return temp;          
+            }
+            return temp;
         }
 
 
@@ -274,9 +274,9 @@ namespace Garage_2._0.Controllers
                 DepartureTime = DateTime.Now
             };
 
-           
+
             ret.TotalParkedTime = ret.DepartureTime - ret.ArrivalTime;
-            
+
 
             ret.Price = ret.TotalParkedTime.Hours * 100;
             ret.Price += ret.TotalParkedTime.Days * 24 * 100;
@@ -284,7 +284,7 @@ namespace Garage_2._0.Controllers
             return ret;
         }
 
-        public async Task<IActionResult> SearchFilter(string regNum,int? vType)
+        public async Task<IActionResult> SearchFilter(string regNum, int? vType)
         {
             var vehicles = string.IsNullOrWhiteSpace(regNum) ?
                 _context.Vehicle :
@@ -299,23 +299,25 @@ namespace Garage_2._0.Controllers
 
         public IActionResult Statistics()
         {
-            return View( new StatsViewModel {
-            AmountOfVehicleTypes = GetAmountOfVehicleTypes(_context.Vehicle),
-            TotalWheels= GetTotalWheels(_context.Vehicle),
-            TotalGeneratedIncome= GetTotalGeneratedIncome(_context.Vehicle),
-            MostCommonColor= GetMostCommonColor(_context.Vehicle),
-            OldestParkTime= GetOldestParkTime(_context.Vehicle)
+            return View(new StatsViewModel
+            {
+                AmountOfVehicleTypes = GetAmountOfVehicleTypes(_context.Vehicle),
+                TotalWheels = GetTotalWheels(_context.Vehicle),
+                TotalGeneratedIncome = GetTotalGeneratedIncome(_context.Vehicle),
+                MostCommonColor = GetMostCommonColor(_context.Vehicle),
+                OldestParkTime = GetOldestParkTime(_context.Vehicle),
+                TotalVehicles = _context.Vehicle.Count()
             });
         }
 
-        public Dictionary<EnumType,int> GetAmountOfVehicleTypes(DbSet<Vehicle> vehicles)
+        public Dictionary<EnumType, int> GetAmountOfVehicleTypes(DbSet<Vehicle> vehicles)
         {
             Dictionary<EnumType, int> temp = new Dictionary<EnumType, int>();
 
             for (int i = 0; i <= (int)(EnumType.MC); i++)
             {
                 var type = (EnumType)i;
-                var amount = vehicles.Select(v => v.VehicleType == type).Count();
+                var amount = vehicles.Where(v => v.VehicleType == type).Count();
                 temp.Add(type, amount);
             }
 
@@ -323,7 +325,7 @@ namespace Garage_2._0.Controllers
         }
 
         public int GetTotalWheels(DbSet<Vehicle> vehicles)
-        {    
+        {
             return (int)vehicles.Select(v => v.Wheels).Sum();
         }
 
@@ -351,16 +353,14 @@ namespace Garage_2._0.Controllers
             for (int i = 0; i <= (int)EnumColor.Annan; i++)
             {
                 EnumColor color = (EnumColor)i;
-                int count = vehicles.Select(v => v.Color == color).Count();
+                int count = vehicles.Where(v => v.Color == color).Count();
 
-                if ( count > amount) 
+                if (count > amount)
                 {
                     currentColor = color;
                     amount = count;
                 }
             }
-            
-
             return currentColor;
         }
 

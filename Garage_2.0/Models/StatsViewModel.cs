@@ -9,6 +9,8 @@ namespace Garage_2._0.Models
     {
         public Dictionary<EnumType,int> AmountOfVehicleTypes { get; set; }
 
+        public int TotalVehicles { get; set; }
+
         public int TotalWheels { get; set; }
 
         public float TotalGeneratedIncome { get; set; }
