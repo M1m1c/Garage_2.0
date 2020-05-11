@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Garage_2._0.Data;
 using Garage_2._0.Models;
 
+
 namespace Garage_2._0.Controllers
 {
     public class VehiclesController : Controller
@@ -64,11 +65,11 @@ namespace Garage_2._0.Controllers
                 vehicle.Brand = vehicle.Brand.ToUpper();
                 vehicle.Model = vehicle.Model.ToUpper();
 
-               
-                    _context.Add(vehicle);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Parked), ToOverviewModel(vehicle));
-                
+
+                _context.Add(vehicle);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Parked), ToOverviewModel(vehicle));
+
             }
 
             return View(vehicle);
@@ -77,11 +78,7 @@ namespace Garage_2._0.Controllers
         [HttpPost]
         public JsonResult IsAlreadySigned(string RegNum)
         {
-            if (_context.Vehicle.Any(v => v.RegNum == RegNum) == false)
-            {
-                return Json("Registrerings nummer används redan");
-            }
-            return Json(true);
+            return Json(_context.Vehicle.Any(v => v.RegNum == RegNum.ToUpper()) == false);
         }
 
         // GET: Vehicles/Edit/5
@@ -172,7 +169,7 @@ namespace Garage_2._0.Controllers
             return _context.Vehicle.Any(e => e.Id == id);
         }
 
-        public async Task<IActionResult> GetOverviewModel(string propertyName, bool isAscending)
+        public IActionResult GetOverviewModel(string propertyName, bool isAscending)
         {
             ViewData["TypeSortParam"] =  "VehicleType";
             ViewData["RegSortParam"] = "RegNum";
@@ -187,7 +184,7 @@ namespace Garage_2._0.Controllers
             return View(model);
         }
 
-        //TODO 
+
         private async Task<IEnumerable<Vehicle>> DetermineColumnSort(string propertyName, bool isAscending)
         {
             List<Vehicle> temp;
