@@ -18,7 +18,7 @@ namespace Garage_2._0.Models
         [Display(Name = "Lämnar")]
         public DateTime DepartureTime { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:d\\ hh\\:mm}")]
+        [DisplayFormat(DataFormatString = "{0:d' dygn'\\ hh' h '\\ mm' m'}")]
         [Display(Name = "Parkeringstid")]
         public TimeSpan TotalParkedTime { get; set; }
 
