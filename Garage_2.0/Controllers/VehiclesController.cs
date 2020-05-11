@@ -109,13 +109,16 @@ namespace Garage_2._0.Controllers
                 return NotFound();
             }
 
+            _context.Entry(vehicle).Property(p => p.Id).IsModified = false;
+            _context.Entry(vehicle).Property(p => p.RegNum).IsModified = false;
+            _context.Entry(vehicle).Property(p => p.ArrivalTime).IsModified = false;
+            _context.Entry(vehicle).Property(p => p.VehicleType).IsModified = false;
+
             if (ModelState.IsValid)
             {
                 try
                 {
                     _context.Update(vehicle);
-                    _context.Entry(vehicle).Property(p => p.ArrivalTime).IsModified = false;
-                    _context.Entry(vehicle).Property(p => p.VehicleType).IsModified = false;
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -169,6 +172,7 @@ namespace Garage_2._0.Controllers
             return _context.Vehicle.Any(e => e.Id == id);
         }
 
+        
         public IActionResult GetOverviewModel(string propertyName, bool isAscending)
         {
             ViewData["TypeSortParam"] = "VehicleType";
@@ -184,7 +188,7 @@ namespace Garage_2._0.Controllers
             return View(model);
         }
 
-
+        
         private async Task<IEnumerable<Vehicle>> DetermineColumnSort(string propertyName, bool isAscending)
         {
             List<Vehicle> temp;
