@@ -1,4 +1,4 @@
-﻿@model Vehicle
+﻿@model Garage_2._0.Models.StatsViewModel
 @{
     ViewData["Title"] = "Statistics";
 }
@@ -17,8 +17,8 @@ Vanligaste märke, färg...
     <div class="row">
         <div class="col-sm">
             <dl class="row">
-                <dt class="col-sm-8">Fordon</dt>
-                <dd class="col-sm-4">200</dd>
+                <dt class="col-sm-8">@Html.DisplayNameFor(model => model.AmountOfVehicleTypes) (Totalt antal fordon)</dt>
+                <dd class="col-sm-4">@Html.DisplayFor(model => model.AmountOfVehicleTypes)</dd>
                                   
                 <dt class="col-sm-8">Bilar</dt>
                 <dd class="col-sm-4">200</dd>
@@ -43,17 +43,17 @@ Vanligaste märke, färg...
 
         <div class="col-sm">
             <dl class="row">
-                <dt class="col-sm-8">Dagens intäkter</dt>
-                <dd class="col-sm-4">200</dd>
+                <dt class="col-sm-8">@Html.DisplayNameFor(model => model.TotalGainedIncome) (Intäkter)</dt>
+                <dd class="col-sm-4">@Html.DisplayFor(model => model.AmountOfVehicleTypes)</dd>
 
-                <dt class="col-sm-8">Totalt antal hjul</dt>
-                <dd class="col-sm-4">200</dd>
+                <dt class="col-sm-8">@Html.DisplayNameFor(model => model.TotalWheels) (Totalt antal hjul)</dt>
+                <dd class="col-sm-4">@Html.DisplayFor(model => model.TotalWheels)</dd>
 
-                <dt class="col-sm-8">Vanligaste märket</dt>
-                <dd class="col-sm-4">200</dd>
+                <dt class="col-sm-8">@Html.DisplayNameFor(model => model.MostCommonColor) (Vanligaste färgen)</dt>
+                <dd class="col-sm-4">@Html.DisplayFor(model => model.MostCommonColor) (Vanligaste färgen)</dd>
 
-                <dt class="col-sm-8">Vanligaste färgen</dt>
-                <dd class="col-sm-4">200</dd>
+                <dt class="col-sm-8">@Html.DisplayNameFor(model => model.OldestParktime) (Längsta parkeringen)</dt>
+                <dd class="col-sm-4">@Html.DisplayFor(model => model.OldestParktime)</dd>
             </dl>
             <div>
                 Senast Uppdaterat:
