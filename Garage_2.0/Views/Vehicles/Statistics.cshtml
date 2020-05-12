@@ -17,13 +17,13 @@ Vanligaste märke, färg...
     <div class="row">
         <div class="col-sm">
             <dl class="row">
-                <dt class="col-sm-8">@Html.DisplayNameFor(model => model.TotalVehicles)</dt>
-                <dd class="col-sm-4">@Html.DisplayFor(model => model.TotalVehicles)</dd>
+                <dt class="col-sm-6">@Html.DisplayNameFor(model => model.TotalVehicles)</dt>
+                <dd class="col-sm-2 text-right">@Html.DisplayFor(model => model.TotalVehicles)</dd>
                 
                 @foreach (var type in Model.AmountOfVehicleTypes)
                 {
-                    <dt class="col-sm-8">@type.Key</dt>
-                    <dd class="col-sm-4">@type.Value</dd>
+                    <dt class="col-sm-6">@type.Key</dt>
+                    <dd class="col-sm-2 text-right">@type.Value</dd>
                 }
             </dl>
         </div>
@@ -31,17 +31,17 @@ Vanligaste märke, färg...
 
         <div class="col-sm">
             <dl class="row">
-                <dt class="col-sm-8">@Html.DisplayNameFor(model => model.TotalGeneratedIncome)</dt>
-                <dd class="col-sm-4">@Html.DisplayFor(model => model.TotalGeneratedIncome)</dd>
+                <dt class="col-sm-6">@Html.DisplayNameFor(model => model.TotalGeneratedIncome)</dt>
+                <dd class="col-sm-4 text-right">@Html.DisplayFor(model => model.TotalGeneratedIncome)</dd>
 
-                <dt class="col-sm-8">@Html.DisplayNameFor(model => model.TotalWheels)</dt>
-                <dd class="col-sm-4">@Html.DisplayFor(model => model.TotalWheels)</dd>
+                <dt class="col-sm-6">@Html.DisplayNameFor(model => model.TotalWheels)</dt>
+                <dd class="col-sm-4 text-right">@Html.DisplayFor(model => model.TotalWheels)</dd>
 
-                <dt class="col-sm-8">@Html.DisplayNameFor(model => model.MostCommonColor)</dt>
-                <dd class="col-sm-4">@Html.DisplayFor(model => model.MostCommonColor)</dd>
+                <dt class="col-sm-6">@Html.DisplayNameFor(model => model.MostCommonColor)</dt>
+                <dd class="col-sm-4 text-right">@Html.DisplayFor(model => model.MostCommonColor)</dd>
 
-                <dt class="col-sm-8">@Html.DisplayNameFor(model => model.OldestParkTime)</dt>
-                <dd class="col-sm-4">@Html.DisplayFor(model => model.OldestParkTime)</dd>
+                <dt class="col-sm-6">@Html.DisplayNameFor(model => model.OldestParkTime)</dt>
+                <dd class="col-sm-4 text-right">@Html.DisplayFor(model => model.OldestParkTime)</dd>
             </dl>
             <div>
                 Senast Uppdaterat:
