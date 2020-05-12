@@ -132,7 +132,7 @@ namespace Garage_2._0.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(EditSuccess),vehicle);
+                return RedirectToAction(nameof(EditSuccess), vehicle);
             }
             return View(vehicle);
         }
@@ -140,7 +140,7 @@ namespace Garage_2._0.Controllers
 
         public async Task<IActionResult> EditSuccess(Vehicle vehicle)
         {
-            
+
             return View(vehicle);
         }
 
@@ -179,8 +179,8 @@ namespace Garage_2._0.Controllers
             return _context.Vehicle.Any(e => e.Id == id);
         }
 
-        
-        public IActionResult GetOverviewModel(string propertyName, bool isAscending)
+
+        public IActionResult GetOverviewModel(string propertyName, bool isAscending, string regNum, int? vType)
         {
             ViewData["TypeSortParam"] = "VehicleType";
             ViewData["RegSortParam"] = "RegNum";
@@ -190,12 +190,14 @@ namespace Garage_2._0.Controllers
 
             var orderedVehicles = DetermineColumnSort(propertyName, isAscending);
 
-            var model = orderedVehicles.Result.Select(v => ToOverviewModel(v));
+            var searchedVehicles = SearchFilter(regNum, vType, orderedVehicles.Result);
+
+            var model = searchedVehicles.Select(v => ToOverviewModel(v));
 
             return View(model);
         }
 
-        
+
         private async Task<IEnumerable<Vehicle>> DetermineColumnSort(string propertyName, bool isAscending)
         {
             List<Vehicle> temp;
@@ -218,6 +220,20 @@ namespace Garage_2._0.Controllers
                 temp = t.OrderBy(v => v.Id).ToList();
             }
             return temp;
+        }
+
+        public IEnumerable<Vehicle> SearchFilter(string regNum, int? vType, IEnumerable<Vehicle> vehicles)
+        {
+
+            vehicles = string.IsNullOrWhiteSpace(regNum) ?
+                vehicles :
+                vehicles.Where(v => v.RegNum.StartsWith(regNum.ToUpper()));
+
+            vehicles = vType == null ? vehicles : vehicles.Where(v => v.VehicleType == (EnumType)vType);
+
+            //var overview = vehicles.Select(v => ToOverviewModel(v));
+
+            return vehicles;
         }
 
 
@@ -293,19 +309,6 @@ namespace Garage_2._0.Controllers
             ret.Price += ret.TotalParkedTime.Days * 24 * 100;
 
             return ret;
-        }
-
-        public async Task<IActionResult> SearchFilter(string regNum, int? vType)
-        {
-            var vehicles = string.IsNullOrWhiteSpace(regNum) ?
-                _context.Vehicle :
-                _context.Vehicle.Where(v => v.RegNum.StartsWith(regNum.ToUpper()));
-
-            vehicles = vType == null ? vehicles : vehicles.Where(v => v.VehicleType == (EnumType)vType);
-
-            var overview = vehicles.Select(v => ToOverviewModel(v));
-
-            return View(nameof(GetOverviewModel), await overview.ToListAsync());
         }
 
         public IActionResult Statistics()
