@@ -7,7 +7,7 @@
 <h1><i class="fas fa-parking mr-1"></i> Parkera</h1>
 <h4>Nytt fordon</h4>
 <hr />
-<div>
+<div id="create">
     <form asp-action="Create">
         <div class="row">
             <div class="col">
@@ -53,7 +53,7 @@
                     <input type="submit" value="Parkera" class="btn btn-primary" />
                 </div>
                 <div>
-                    <a asp-action="GetOverviewModel">Tillbaka till översikt</a>
+                    <a asp-action="GetOverviewModel" class="btn btn-light border-dark">Tillbaka till översikt</a>
                 </div>
             </div>
         </div>
